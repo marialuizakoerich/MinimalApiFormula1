@@ -1,4 +1,5 @@
 import fastify from "fastify";
+import cors from "@fastify/cors";
 import {
   getTeamByIdController,
   getTeamsController,
@@ -8,9 +9,12 @@ import {
   getDriversController,
 } from "./controllers/drivers-controller";
 import chalk from "chalk";
-import { getTeamsById } from "./services/teams-services";
 
 const server = fastify({ logger: true });
+
+server.register(cors, {
+  origin: "*"
+})
 
 server.get("/teams", getTeamsController);
 server.get("/teams/:id", getTeamByIdController);
